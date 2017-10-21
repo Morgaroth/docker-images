@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-from os import environ as env, system
+from subprocess import check_output
 
 from docker import Client
 from docker.errors import APIError
-from subprocess import check_output
+from os import environ as env
 
 preserved = {'registry-ui'}
 

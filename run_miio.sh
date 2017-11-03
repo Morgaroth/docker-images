@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-CONTAINER_NAME=pgadmin
+CONTAINER_NAME=miio
 
 A=`docker inspect -f {{.State.Running}} ${CONTAINER_NAME}`
 B=`docker inspect -f {{.State}} ${CONTAINER_NAME}`
@@ -20,12 +20,10 @@ else
     echo "Docker $CONTAINER_NAME not found."
 fi
 
-DOCKER_OWNER=`stat -c "%u:%g" $HOME`
-echo "Owner of image $CONTAINER_NAME will be $DOCKER_OWNER"
-
-docker run --detach \
-    --user ${DOCKER_OWNER} \
+docker run \
+    --detach \
+    --tty \
     --restart=always \
     --name ${CONTAINER_NAME} \
-    --net host \
-    thajeztah/pgadmin4
+    --net=host \
+    python-miio

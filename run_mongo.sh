@@ -28,6 +28,7 @@ echo "Owner of image $CONTAINER_NAME will be $DOCKER_OWNER"
 docker run --detach \
     --user ${DOCKER_OWNER} \
     --restart=always \
+    --memory=1g \
     --name ${CONTAINER_NAME} \
     --publish 28017:27017 \
     --expose=28017 \

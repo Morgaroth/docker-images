@@ -23,6 +23,7 @@ fi
 docker run \
     --detach \
     --tty \
+    --memory=200m \
     --restart=always \
     --name ${CONTAINER_NAME} \
     --net=host \

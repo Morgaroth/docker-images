@@ -25,6 +25,7 @@ docker run \
     --detach \
     --restart=always \
     --name=${CONTAINER_NAME} \
+    --memory=300m \
     --net=host \
 	-v ${MEDIA_DIR}:/opt \
 	derflocki/minidlna

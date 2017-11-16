@@ -5,6 +5,8 @@ CONTAINER_NAME=postgres
 
 DATA_DIR=$HOME/docker/data
 
+mkdir $DATA_DIR/postgres_tmp
+
 A=`docker inspect -f {{.State.Running}} ${CONTAINER_NAME}`
 B=`docker inspect -f {{.State}} ${CONTAINER_NAME}`
 echo "'$A' '$B' '$?'"
@@ -34,6 +36,7 @@ docker run --detach \
     --publish 15432:5432 \
     --expose 15432 \
     --volume ${DATA_DIR}/postgres:/var/lib/postgresql/data/pgdata \
+    --volume /data/data:/data/data \
     postgres:9
 
 #docker stop ${CONTAINER_NAME}

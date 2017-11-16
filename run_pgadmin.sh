@@ -25,6 +25,7 @@ echo "Owner of image $CONTAINER_NAME will be $DOCKER_OWNER"
 
 docker run --detach \
     --user ${DOCKER_OWNER} \
+    --memory=200m \
     --restart=always \
     --name ${CONTAINER_NAME} \
     --net host \

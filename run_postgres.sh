@@ -31,6 +31,7 @@ docker run --detach \
     --restart=always \
     --name ${CONTAINER_NAME} \
     --env POSTGRES_PASSWORD=ala123 \
+    --memory=1g \
     --env POSTGRES_USER=morgaroth_user \
     --env PGDATA=/var/lib/postgresql/data/pgdata \
     --publish 15432:5432 \

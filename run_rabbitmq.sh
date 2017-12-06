@@ -26,6 +26,8 @@ docker run --detach \
     --memory=2g \
     --env RABBITMQ_VM_MEMORY_HIGH_WATERMARK=0.20 \
     --publish 15673:15672 \
+    --publish 5673:5672 \
     --expose 15673 \
+    --expose 5673 \
     rabbitmq:3-management
 

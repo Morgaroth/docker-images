@@ -23,6 +23,7 @@ fi
 DOCKER_OWNER=`stat -c "%u:%g" $HOME`
 echo "Owner of image $CONTAINER_NAME will be $DOCKER_OWNER"
 
+docker pull thajeztah/pgadmin4:latest
 docker run --detach \
     --user ${DOCKER_OWNER} \
     --memory=200m \

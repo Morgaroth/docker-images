@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
+CONTAINER_NAME=jenkins
+DATA_DIR=$HOME/docker/data/jenkins
 
-CONTAINER_NAME=mongo
-
-DATA_DIR=$HOME/docker/data
 
 A=`docker inspect -f {{.State.Running}} ${CONTAINER_NAME}`
 B=`docker inspect -f {{.State}} ${CONTAINER_NAME}`
@@ -22,15 +21,19 @@ else
     echo "Docker $CONTAINER_NAME not found."
 fi
 
-DOCKER_OWNER=`stat -c "%u:%g" $HOME`
+mkdir ${DATA_DIR} 2>&1 > /dev/null
+DOCKER_OWNER=`stat -c "%u:%g" $DATA_DIR`
 echo "Owner of image $CONTAINER_NAME will be $DOCKER_OWNER"
 
-docker run --detach \
+docker run \
+    --detach \
     --user ${DOCKER_OWNER} \
     --restart=always \
+    --name=${CONTAINER_NAME} \
     --memory=2g \
-    --name ${CONTAINER_NAME} \
-    --publish 28017:27017 \
-    --expose=28017 \
-    --volume ${DATA_DIR}/mongo:/data/db \
-    mongo:3
+    --publish=18080:8080 \
+    --expose=18080 \
+	-v ${DATA_DIR}:/var/jenkins_home \
+	jenkins/jenkins:lts
+
+docker exec -ti ${CONTAINER_NAME} /usr/local/bin/install-plugins.sh bitbucket-pullrequest-builder

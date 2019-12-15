@@ -2,7 +2,7 @@
 
 CONTAINER_NAME=minidlna
 
-MEDIA_DIR=$HOME/minidlna
+MEDIA_DIR=/opt/filmy
 
 A=`docker inspect -f {{.State.Running}} ${CONTAINER_NAME}`
 B=`docker inspect -f {{.State}} ${CONTAINER_NAME}`
